@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../Providers/AuthProvider';
 const RegisterForm = () => {
   const {
     register,
@@ -6,8 +8,23 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
+  const { handleEmailPassSignup, profileUpdate } = useContext(AuthContext);
+
   const handleOnSubmit = (data) => {
-    console.log(data);
+    const { name, photoUrl, email, password } = data;
+    handleEmailPassSignup(email, password)
+      .then((userCredential) => {
+        profileUpdate(name, photoUrl)
+          .then(() => {
+            console.log('Profile Updated', userCredential);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -126,7 +143,7 @@ const RegisterForm = () => {
           type="submit"
           className="mt-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-mandarin text-rich hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800"
         >
-          Sign in
+          Sign Up
         </button>
       </div>
     </form>

@@ -1,12 +1,24 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../Providers/AuthProvider';
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const { handleEmailPassSignin } = useContext(AuthContext);
+
   const handleOnSubmit = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    handleEmailPassSignin(email, password)
+      .then(() => {
+        console.log('logged in success');
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
@@ -89,7 +101,7 @@ const LoginForm = () => {
           type="submit"
           className="mt-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-mandarin text-rich hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800"
         >
-          Sign in
+          Sign In
         </button>
       </div>
     </form>
