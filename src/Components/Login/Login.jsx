@@ -1,6 +1,7 @@
 import { FcGoogle } from 'react-icons/fc';
 import loginBG from '../../assets/loginBG.svg';
 import { Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
 const Login = () => {
   return (
     <div className="w-full mx-auto gap-10 h-full bg-white dark:bg-oxford flex flex-col sm:flex-row justify-center items-center grow">
@@ -30,58 +31,7 @@ const Login = () => {
               Or
             </div>
             {/* Form */}
-            <form>
-              <div className="grid gap-y-4">
-                {/* Form Group */}
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm mb-2 dark:text-white"
-                  >
-                    Email address
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="py-3 px-4 block w-full border border-gray-200 bg-white rounded-md text-sm focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700 dark:text-gray-400"
-                      required=""
-                      aria-describedby="email-error"
-                    />
-                  </div>
-                </div>
-                {/* End Form Group */}
-                {/* Form Group */}
-                <div>
-                  <div className="flex justify-between items-center">
-                    <label
-                      htmlFor="password"
-                      className="block text-sm mb-2 dark:text-white"
-                    >
-                      Password
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      className="py-3 px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-slate-500 focus:ring-slate-500 bg-white dark:border-gray-700 dark:text-gray-400"
-                      required=""
-                      aria-describedby="password-error"
-                    />
-                  </div>
-                </div>
-                {/* End Form Group */}
-                <button
-                  type="submit"
-                  className="mt-4 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-mandarin text-rich hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800"
-                >
-                  Sign in
-                </button>
-              </div>
-            </form>
+            <LoginForm />
             {/* End Form */}
           </div>
         </div>
