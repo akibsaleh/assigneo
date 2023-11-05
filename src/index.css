@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;900&family=Manrope:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.333;
+  @apply font-normal;
+  @apply text-base;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+#root {
+  @apply min-h-screen;
+  @apply flex;
+  @apply flex-col;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Lexend', sans-serif;
+  @apply leading-normal;
+}
+
+h1 {
+  @apply text-[4.209rem];
+}
+
+h2 {
+  @apply text-[3.157rem];
+}
+
+h3 {
+  @apply text-[2.369rem];
+}
+
+h4 {
+  @apply text-[1.77rem];
+}
+
+h5,
+h6 {
+  @apply text-[1.33rem];
+}
