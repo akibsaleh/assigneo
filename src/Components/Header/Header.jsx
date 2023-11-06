@@ -21,7 +21,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <a
               className="flex-none text-xl font-semibold dark:text-white"
-              href="#"
+              href="/"
               aria-label="Brand"
             >
               <img
