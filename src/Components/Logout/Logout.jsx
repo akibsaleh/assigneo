@@ -1,15 +1,16 @@
 import { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Logout = () => {
   const { user, handleLogout, profileInfo } = useContext(AuthContext);
   const onLogOut = () => {
     handleLogout()
       .then(() => {
-        console.log('Logged Out Successfully');
+        toast.success('Signed Out Successfully');
       })
       .catch((err) => {
-        console.log(err.message);
+        toast.error(err.message);
       });
   };
   return (

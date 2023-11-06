@@ -17,9 +17,14 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const handleEmailPassSignup = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+  const handleEmailPassSignup = async (email, password) => {
+    try {
+      setLoading(true);
+      return createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   };
 
   const handleGoogleLogin = () => {

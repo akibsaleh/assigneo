@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
 import { updateProfile } from 'firebase/auth';
+import { toast } from 'react-toastify';
 const RegisterForm = () => {
   const {
     register,
@@ -16,14 +17,15 @@ const RegisterForm = () => {
     const { name, photo, email, password } = data;
     try {
       const userCredential = await handleEmailPassSignup(email, password);
-      const profile = await updateProfile(userCredential?.user?.auth?.currentUser, { displayName: name, photoURL: photo });
+      await updateProfile(userCredential?.user?.auth?.currentUser, { displayName: name, photoURL: photo }).then(() => toast.success(`${name} signed up successfully`));
       const newProfileInfo = await {
         name: userCredential?.user?.auth?.currentUser?.displayName,
         photo: userCredential?.user?.auth?.currentUser?.photoURL,
       };
       setProfileInfo(newProfileInfo);
+      if (!userCredential.user) toast.error(userCredential);
     } catch (err) {
-      console.log(err);
+      if (err.message === 'Firebase: Error (auth/email-already-in-use).') toast.error('This email is already registered. Please try with another valid email.');
     }
   };
 

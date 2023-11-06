@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
+import { toast } from 'react-toastify';
 const LoginForm = () => {
   const {
     register,
@@ -14,10 +15,10 @@ const LoginForm = () => {
     const { email, password } = data;
     handleEmailPassSignin(email, password)
       .then(() => {
-        console.log('logged in success');
+        toast.success('Logged in successfully');
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
       });
   };
 

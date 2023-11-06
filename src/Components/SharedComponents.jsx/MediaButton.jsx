@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../Providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const MediaButton = () => {
   const { handleGoogleLogin } = useContext(AuthContext);
   const onGoogleSignin = () => {
     handleGoogleLogin()
       .then((user) => {
-        console.log(user);
+        toast.success('Logged in successfully with google');
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error);
       });
   };
 
