@@ -1,13 +1,16 @@
 import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import auth from '../Firebase/Firebase.init';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profileInfo, setProfileInfo] = useState(null);
 
   const handleEmailPassSignin = (email, password) => {
     setLoading(true);
@@ -21,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
   const handleGoogleLogin = () => {
     setLoading(true);
-    return signInWithPopup(auth);
+    return signInWithPopup(auth, googleProvider);
   };
 
   const handleLogout = () => {
@@ -30,16 +33,21 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const profileUpdate = (name, photo) => {
-    return updateProfile(auth.currentUser, { displayName: name, photoURL: photo });
-  };
-
   useEffect(() => {
-    const unSubscribe = () =>
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUser(user);
+    const unSubscribe = async () =>
+      onAuthStateChanged(auth, (currentUser) => {
+        const userEmail = currentUser?.email || user?.email;
+        const loggedUser = { email: userEmail };
+        if (currentUser) {
+          setUser(currentUser);
           setLoading(false);
+          axios
+            .post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+            .then()
+            .catch((err) => console.log(err));
+        } else {
+          setProfileInfo({});
+          axios.post('http://localhost:5000/logout', loggedUser, { withCredentials: true });
         }
       });
 
@@ -48,7 +56,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const authInfo = { user, loading, handleEmailPassSignin, handleEmailPassSignup, handleGoogleLogin, handleLogout, profileUpdate };
+  const authInfo = { user, loading, handleEmailPassSignin, handleEmailPassSignup, handleGoogleLogin, handleLogout, profileInfo, setProfileInfo };
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
 };
 

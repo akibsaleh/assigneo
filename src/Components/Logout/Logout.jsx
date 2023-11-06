@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
 
 const Logout = () => {
-  const { user, handleLogout } = useContext(AuthContext);
+  const { user, handleLogout, profileInfo } = useContext(AuthContext);
   const onLogOut = () => {
     handleLogout()
       .then(() => {
@@ -14,16 +14,16 @@ const Logout = () => {
   };
   return (
     <div className="flex gap-x-7 justify-center items-center">
-      <div className="hs-tooltip inline-block">
+      <div className="hs-tooltip inline-block [--placement:bottom]">
         <img
-          src={user?.photoURL}
+          src={user?.photoURL || profileInfo?.photo}
           className="hs-tooltip-toggle w-12 h-12 rounded-full shadow border-2 border-mandarin"
         />
         <span
-          className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white"
+          className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1.5 px-3 rounded-md bg-rich dark:bg-platinum text-white"
           role="tooltip"
         >
-          Tooltip on top
+          {user?.displayName || profileInfo?.name}
         </span>
       </div>
       <button

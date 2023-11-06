@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 const RegisterForm = () => {
   const {
     register,
@@ -8,24 +10,23 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { handleEmailPassSignup, profileUpdate } = useContext(AuthContext);
+  const { handleEmailPassSignup, setProfileInfo } = useContext(AuthContext);
 
-  const handleOnSubmit = (data) => {
-    const { name, photoUrl, email, password } = data;
-    handleEmailPassSignup(email, password)
-      .then((userCredential) => {
-        profileUpdate(name, photoUrl)
-          .then(() => {
-            console.log('Profile Updated', userCredential);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+  const handleOnSubmit = async (data) => {
+    const { name, photo, email, password } = data;
+    try {
+      const userCredential = await handleEmailPassSignup(email, password);
+      const profile = await updateProfile(userCredential?.user?.auth?.currentUser, { displayName: name, photoURL: photo });
+      const newProfileInfo = await {
+        name: userCredential?.user?.auth?.currentUser?.displayName,
+        photo: userCredential?.user?.auth?.currentUser?.photoURL,
+      };
+      setProfileInfo(newProfileInfo);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>
       <div className="grid gap-y-4">
@@ -53,7 +54,7 @@ const RegisterForm = () => {
         {/* Form Group */}
         <div>
           <label
-            htmlFor="photoUrl"
+            htmlFor="photo"
             className="block text-sm mb-2 dark:text-white"
           >
             Profile Photo
@@ -61,9 +62,9 @@ const RegisterForm = () => {
           <div className="relative">
             <input
               type="url"
-              id="photoUrl"
+              id="photo"
               className="py-3 px-4 block w-full border border-gray-200 bg-white rounded-md text-sm focus:border-slate-500 focus:ring-slate-500 dark:border-gray-700 dark:text-gray-400"
-              {...register('photoUrl', {
+              {...register('photo', {
                 required: false,
                 pattern: {
                   value: /^(ftp|http|https):\/\/[^ "]+$/,

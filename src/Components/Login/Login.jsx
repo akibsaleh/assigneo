@@ -1,7 +1,7 @@
-import { FcGoogle } from 'react-icons/fc';
 import loginBG from '../../assets/loginBG.svg';
 import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import MediaButton from '../SharedComponents.jsx/MediaButton';
 const Login = () => {
   return (
     <div className="w-full mx-auto gap-10 h-full bg-white dark:bg-oxford flex flex-col sm:flex-row justify-center items-center grow">
@@ -20,13 +20,7 @@ const Login = () => {
             </p>
           </div>
           <div className="mt-5">
-            <button
-              type="button"
-              className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-full border font-medium bg-white text-rich shadow-sm align-middle hover:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-amber-400 transition-all text-sm dark:bg-slate-700 dark:hover:bg-slate-600 dark:border-slate-700 dark:text-gray-200 dark:hover:text-white dark:focus:ring-offset-gray-800"
-            >
-              <FcGoogle />
-              Sign in with Google
-            </button>
+            <MediaButton />
             <div className="py-3 flex items-center text-xs text-gray-200 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
               Or
             </div>

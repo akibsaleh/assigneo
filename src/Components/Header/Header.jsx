@@ -10,7 +10,6 @@ import Logout from '../Logout/Logout';
 
 const Header = () => {
   const { user } = useContext(AuthContext);
-  console.log(user?.email);
   return (
     <>
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-oxford dark:border-gray-700">
@@ -39,7 +38,7 @@ const Header = () => {
 
           <div className="flex items-center gap-x-4 sm:gap-x-7 ml-auto sm:ml-0 sm:order-3 sm:pl-6">
             <ThemeToggle />
-            {user?.email ? <Logout /> : <AccessButtons />}
+            {user ? <Logout /> : <AccessButtons />}
 
             <div className="sm:hidden">
               <button
