@@ -2,10 +2,15 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/AssigneoLogo.svg';
 import whiteLogo from '../../assets/AssigneoLogoWhite.svg';
 import ThemeToggle from './ThemeToggle';
-import { PiUserCircleGear, PiUserCirclePlus } from 'react-icons/pi';
 import { HiOutlineMenu } from 'react-icons/hi';
+import AccessButtons from './AccessButtons';
+import { useContext } from 'react';
+import { AuthContext } from '../Providers/AuthProvider';
+import Logout from '../Logout/Logout';
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user?.email);
   return (
     <>
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-oxford dark:border-gray-700">
@@ -34,28 +39,7 @@ const Header = () => {
 
           <div className="flex items-center gap-x-4 sm:gap-x-7 ml-auto sm:ml-0 sm:order-3 sm:pl-6">
             <ThemeToggle />
-            <div className="hidden sm:flex divide-x divide-rich">
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  (isActive ? 'bg-amber-300 hover:bg-mandarin' : 'bg-mandarin hover:bg-amber-400') +
-                  ` flex items-center gap-x-2 capitalize font-semibold  px-3.5 py-2 rounded-s-full text-rich transition-colors duration-200 hover:bg-amber-400 hover:text-slate-700 sm:border-gray-300 sm:my-6`
-                }
-              >
-                <PiUserCircleGear className="text-2xl" />
-                Sign in
-              </NavLink>
-              <NavLink
-                to="/register"
-                className={({ isActive }) =>
-                  (isActive ? 'bg-amber-300 hover:bg-mandarin' : 'bg-mandarin hover:bg-amber-400') +
-                  ` flex items-center gap-x-2 capitalize font-semibold  px-3.5 py-2 rounded-e-full text-rich transition-colors duration-200 hover:bg-amber-400 hover:text-slate-700 sm:border-gray-300 sm:my-6`
-                }
-              >
-                <PiUserCirclePlus className="text-2xl" />
-                Sign up
-              </NavLink>
-            </div>
+            {user?.email ? <Logout /> : <AccessButtons />}
 
             <div className="sm:hidden">
               <button
