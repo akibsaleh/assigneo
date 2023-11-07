@@ -42,6 +42,7 @@ const AssignmentForm = () => {
     const result = await axios.post('http://localhost:5000/assignment', formData);
 
     if (result.status === 200) {
+      console.log(result);
       toast.success('Assignment published successfully');
       setIsPublished(true);
     }
