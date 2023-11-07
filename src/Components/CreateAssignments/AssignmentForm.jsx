@@ -4,9 +4,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FileUploader } from 'react-drag-drop-files';
 import { useForm } from 'react-hook-form';
 import { TiDocumentAdd } from 'react-icons/ti';
-import { RiUploadCloud2Line } from 'react-icons/ri';
+import { LuImagePlus } from 'react-icons/lu';
+import { CgArrowsExchangeAltV } from 'react-icons/cg';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const fileTypes = ['JPG', 'PNG'];
+const fileTypes = ['jpg', 'jpeg', 'png'];
 
 const AssignmentForm = () => {
   const {
@@ -14,10 +17,12 @@ const AssignmentForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm();
 
   const [dueDate, setDueDate] = useState(new Date());
   const [thumb, setThumb] = useState(null);
+  const [isPublished, setIsPublished] = useState(false);
 
   const handleThumb = (file) => {
     setThumb(file);
@@ -28,10 +33,29 @@ const AssignmentForm = () => {
     setValue('thumb', thumb);
   }, [dueDate, setValue, thumb]);
 
-  const handleOnSubmit = (data) => {
-    console.dir(data);
-    console.log(errors);
+  const handleOnSubmit = async (data) => {
+    const formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+
+    const result = await axios.post('http://localhost:5000/assignment', formData);
+
+    if (result.status === 200) {
+      toast.success('Assignment published successfully');
+      setIsPublished(true);
+    }
+
+    if (errors) console.log(errors);
   };
+
+  useEffect(() => {
+    if (isPublished) {
+      reset();
+      setDueDate(new Date());
+      setThumb(null);
+    }
+  }, [isPublished, reset]);
   return (
     <form
       className="w-full max-w-4xl rounded-md shadow-lg bg-platinum/20 p-10 mt-5 mb-20 mx-auto min-h-[500px] grid grid-cols-12 items-center gap-10"
@@ -43,10 +67,24 @@ const AssignmentForm = () => {
           handleChange={handleThumb}
           types={fileTypes}
         >
-          <div className="flex justify-center items-center min-h-[300px] w-full bg-platinum/30 rounded-2xl mb-5 border-platinum border-2 border-dashed cursor-pointer">
-            {!thumb && (
+          <div className="flex flex-col justify-center items-center min-h-[300px] w-full bg-platinum/30 rounded-2xl mb-5 border-platinum border-2 border-dashed cursor-pointer overflow-hidden">
+            {thumb ? (
+              <div className="h-full flex-1 flex flex-col relative p-1 overflow-hidden">
+                <img
+                  src={URL.createObjectURL(thumb)}
+                  alt="thumbnail"
+                  className="flex-1 h-full w-auto object-cover rounded-xl"
+                />
+                <button
+                  type="button"
+                  className="py-1.5 px-5 text-sm font-semibold bg-platinum text-rich/75 rounded-full w-48 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center shadow-lg"
+                >
+                  <CgArrowsExchangeAltV className="text-xl" /> Change Thumbnail
+                </button>
+              </div>
+            ) : (
               <div className="flex flex-col text-center items-center gap-1 ">
-                <RiUploadCloud2Line className="text-3xl text-rich/70" />
+                <LuImagePlus className="text-3xl text-rich/70" />
                 <p className="text-rich/50 text-sm font-bold">Click to upload or drag and drop</p>
                 <p className="text-rich/30 text-xs font-bold">Only JPG & PNG file allowed</p>
               </div>
