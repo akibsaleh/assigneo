@@ -79,6 +79,15 @@ const Header = () => {
                 All Assignments
               </NavLink>
               <NavLink
+                to="/create-assignment"
+                className={({ isActive }) =>
+                  (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
+                  ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
+                }
+              >
+                Create Assignment
+              </NavLink>
+              <NavLink
                 to="/my-assignments"
                 className={({ isActive }) =>
                   (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +

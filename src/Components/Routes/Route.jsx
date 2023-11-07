@@ -7,6 +7,7 @@ import AllAssignments from '../AllAssignments/AllAssignments';
 import MyAssignments from '../MyAssignments/MyAssignments';
 import UpdateAssignment from '../UpdateAssignment/UpdateAssignment';
 import SingleAssignment from '../SingleAssignment/SingleAssignment';
+import CreateAssignments from '../CreateAssignments/CreateAssignments';
 
 export const route = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const route = createBrowserRouter([
       {
         path: '/all-assignments',
         element: <AllAssignments />,
+      },
+      {
+        path: '/create-assignment',
+        element: <CreateAssignments />,
       },
       {
         path: '/my-assignments',
