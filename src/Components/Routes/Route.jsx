@@ -8,6 +8,7 @@ import MyAssignments from '../MyAssignments/MyAssignments';
 import UpdateAssignment from '../UpdateAssignment/UpdateAssignment';
 import SingleAssignment from '../SingleAssignment/SingleAssignment';
 import CreateAssignments from '../CreateAssignments/CreateAssignments';
+import axios from 'axios';
 
 export const route = createBrowserRouter([
   {
@@ -40,8 +41,13 @@ export const route = createBrowserRouter([
         element: <MyAssignments />,
       },
       {
-        path: '/update-assignment/:id',
+        path: '/assignment/:id',
+        element: <SingleAssignment />,
+      },
+      {
+        path: '/update/:id',
         element: <UpdateAssignment />,
+        loader: ({ params }) => axios.get(`/update/${params.id}`).data,
       },
       {
         path: '/assignment/',

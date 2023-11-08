@@ -41,7 +41,7 @@ const AssignmentForm = () => {
 
     const result = await axios.post('http://localhost:5000/assignment', formData);
 
-    if (result.status === 200) {
+    if (result.status === 200 && result.data.insertedId) {
       console.log(result);
       toast.success('Assignment published successfully');
       setIsPublished(true);
@@ -57,6 +57,7 @@ const AssignmentForm = () => {
       setThumb(null);
     }
   }, [isPublished, reset]);
+
   return (
     <form
       className="w-full max-w-4xl rounded-md shadow-lg bg-platinum/20 p-10 mt-5 mb-20 mx-auto min-h-[500px] grid grid-cols-12 items-center gap-10"
@@ -123,8 +124,11 @@ const AssignmentForm = () => {
             id="title"
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             placeholder="Enter the title of the assignment"
-            {...register('title')}
+            {...register('title', {
+              required: 'Assignment title is required',
+            })}
           />
+          {errors.title && <p className="text-sm mt-1 text-red-500">{errors.title?.message}</p>}
         </div>
         {/* Marks */}
         <div className="flex flex-col gap-2">
@@ -139,8 +143,11 @@ const AssignmentForm = () => {
             id="marks"
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             placeholder="Enter the title of the assignment"
-            {...register('marks')}
+            {...register('marks', {
+              required: 'Assignment marks is required',
+            })}
           />
+          {errors.marks && <p className="text-sm mt-1 text-red-500">{errors.marks?.message}</p>}
         </div>
         {/* difficulty level */}
         <div className="flex flex-col gap-2">
@@ -154,15 +161,24 @@ const AssignmentForm = () => {
             <select
               id="hs-select-label"
               className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
-              {...register('difficulty')}
-              defaultValue="Open this select menu"
+              defaultValue="default"
+              {...register('difficulty', {
+                required: 'Difficulty level is required',
+              })}
             >
-              <option disabled>Select difficulty from options</option>
+              <option
+                value="default"
+                disabled
+                hidden
+              >
+                Select difficulty from options
+              </option>
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
             </select>
           </>
+          {errors.difficulty && <p className="text-sm mt-1 text-red-500">{errors.difficulty?.message}</p>}
         </div>
         {/* Due Date */}
         <div className="flex flex-col gap-2">
@@ -191,8 +207,11 @@ const AssignmentForm = () => {
             rows={3}
             placeholder="This is a textarea placeholder"
             defaultValue={''}
-            {...register('description')}
+            {...register('description', {
+              required: 'Assignment description is required',
+            })}
           />
+          {errors.description && <p className="text-sm mt-1 text-red-500">{errors.description?.message}</p>}
         </div>
       </div>
       <div className="col-span-12 w-full flex justify-center py-5">

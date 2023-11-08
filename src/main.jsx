@@ -6,6 +6,8 @@ import { route } from './Components/Routes/Route';
 import AuthProvider from './Components/Providers/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:5000';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
