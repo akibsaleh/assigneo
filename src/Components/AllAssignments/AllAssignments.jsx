@@ -37,7 +37,7 @@ const AllAssignments = () => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col">
+    <div className="container max-w-screen-xl mx-auto flex flex-col">
       <div className="bg-white dark:bg-oxford">
         <Title
           title={'All Assignments'}

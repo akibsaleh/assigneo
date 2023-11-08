@@ -97,7 +97,11 @@ const SingleAssignment = () => {
                 </button>
               </div>
               <div className="p-4 overflow-y-auto">
-                <TakeAssignmentForm />
+                <TakeAssignmentForm
+                  id={id}
+                  title={data?.title}
+                  marks={data?.marks}
+                />
               </div>
             </div>
           </div>

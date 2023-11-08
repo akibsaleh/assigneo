@@ -1,13 +1,47 @@
 /* eslint-disable no-unused-vars */
+import axios from 'axios';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLink } from 'react-icons/ai';
-const TakeAssignmentForm = () => {
+import { toast } from 'react-toastify';
+import { AuthContext } from '../Providers/AuthProvider';
+import PropTypes from 'prop-types';
+
+const TakeAssignmentForm = ({ id, title, marks }) => {
+  const { user } = useContext(AuthContext);
+
+  const dateObj = new Date();
+  const currentDate = dateObj.toDateString().substring(4);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
-  const handleOnSubmit = (data) => console.log(data);
+  const handleOnSubmit = (data) => {
+    if (user) {
+      const newData = {
+        ...data,
+        displayName: user?.displayName,
+        email: user?.email,
+        photoURL: user?.photoURL,
+        status: 'pending',
+        assignment_id: id,
+        date: currentDate,
+        assignment_title: title,
+        marks: marks,
+      };
+      axios.post('/submissions', newData).then((result) => {
+        if (result?.data?.insertedId) {
+          toast.success('Your assignment submitted successfully');
+          reset();
+        }
+      });
+    } else {
+      toast.error('Please login to submit assignment');
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
@@ -63,3 +97,9 @@ const TakeAssignmentForm = () => {
 };
 
 export default TakeAssignmentForm;
+
+TakeAssignmentForm.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  marks: PropTypes.string.isRequired,
+};
