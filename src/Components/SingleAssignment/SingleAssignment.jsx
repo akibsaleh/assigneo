@@ -19,6 +19,10 @@ const SingleAssignment = () => {
     axios.get(`/assignment/${id}`).then((result) => setData(result?.data));
   }, [id]);
 
+  const handleDelete = () => {
+    console.log('It will delete the Assignment');
+  };
+
   if (data === null) {
     return (
       <div className="container mx-auto flex justify-center items-start grow">
@@ -59,6 +63,7 @@ const SingleAssignment = () => {
             </button>
             <button
               type="button"
+              onClick={handleDelete}
               className="w-fit py-3.5 px-8 inline-flex gap-x-2 font-bold capitalize justify-center items-center rounded-full border border-mandarin/50 bg-red-500 text-white shadow-sm hover:bg-red-700 duration-200 transition-colors"
             >
               <BiSolidTrash className="text-xl" /> Delete

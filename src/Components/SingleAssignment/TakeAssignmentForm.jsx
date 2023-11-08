@@ -1,7 +1,18 @@
+/* eslint-disable no-unused-vars */
+import { useForm } from 'react-hook-form';
 import { AiOutlineLink } from 'react-icons/ai';
 const TakeAssignmentForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleOnSubmit = (data) => console.log(data);
   return (
-    <form className="flex flex-col gap-y-5 items-center">
+    <form
+      onSubmit={handleSubmit(handleOnSubmit)}
+      className="flex flex-col gap-y-5 items-center"
+    >
       <div className="w-full px-5">
         <label
           htmlFor="hs-trailing-icon"
@@ -16,11 +27,15 @@ const TakeAssignmentForm = () => {
             name="hs-trailing-icon"
             className="py-3 px-4 pe-11 block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
             placeholder="Enter the link of your assignment. Ex. Google Drive Link"
+            {...register('pdf', {
+              required: 'Pdf link is required',
+            })}
           />
           <div className="absolute inset-y-0 end-0 flex items-center pointer-events-none z-20 pe-4">
-            <AiOutlineLink classNametext-2xl />
+            <AiOutlineLink className="text-2xl" />
           </div>
         </div>
+        {errors.pdf && <p className="text-red-400 text-sm mt-1">{errors?.pdf?.message}</p>}
       </div>
       <div className="w-full px-5">
         <label
@@ -34,6 +49,7 @@ const TakeAssignmentForm = () => {
           rows={3}
           id="note"
           placeholder="This is a textarea placeholder"
+          {...register('note')}
         />
       </div>
       <button
