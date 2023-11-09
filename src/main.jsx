@@ -7,7 +7,7 @@ import AuthProvider from './Components/Providers/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://b8a11-server-side-akibsaleh.vercel.app/';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

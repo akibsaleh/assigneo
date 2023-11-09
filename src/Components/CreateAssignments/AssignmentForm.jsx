@@ -39,7 +39,7 @@ const AssignmentForm = () => {
       formData.append(key, data[key]);
     }
 
-    const result = await axios.post('http://localhost:5000/assignment', formData);
+    const result = await axios.post('/assignment', formData);
 
     if (result.status === 200 && result.data.insertedId) {
       console.log(result);

@@ -8,7 +8,7 @@ const SubmittedAssignments = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    axios.get('/submissions').then((res) => setData(res.data));
+    axios.get('/submissions/').then((res) => setData(res.data));
   }, []);
 
   if (!data)

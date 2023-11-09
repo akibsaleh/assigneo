@@ -10,6 +10,7 @@ import SingleAssignment from '../SingleAssignment/SingleAssignment';
 import CreateAssignments from '../CreateAssignments/CreateAssignments';
 import axios from 'axios';
 import SubmittedAssignments from '../SubmittedAssignments/SubmittedAssignments';
+import SingleSubmission from '../SingleSubmission/SingleSubmission';
 
 export const route = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const route = createBrowserRouter([
       {
         path: '/assignment/:id',
         element: <SingleAssignment />,
+      },
+      {
+        path: '/submission/:id',
+        element: <SingleSubmission />,
       },
       {
         path: '/update/:id',

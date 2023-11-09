@@ -47,12 +47,12 @@ const AuthProvider = ({ children }) => {
           setUser(currentUser);
           setLoading(false);
           axios
-            .post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+            .post('/jwt', loggedUser, { withCredentials: true })
             .then()
             .catch((err) => console.log(err));
         } else {
           setProfileInfo({});
-          axios.post('http://localhost:5000/logout', loggedUser, { withCredentials: true });
+          axios.post('/logout', loggedUser, { withCredentials: true });
         }
       });
 

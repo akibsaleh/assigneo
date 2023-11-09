@@ -18,6 +18,10 @@
   @apply min-h-screen;
   @apply flex;
   @apply flex-col;
+  @apply bg-white;
+  @apply dark:bg-rich;
+  @apply text-rich;
+  @apply dark:text-white;
 }
 
 h1,
@@ -49,4 +53,9 @@ h4 {
 h5,
 h6 {
   @apply text-[1.33rem];
+}
+
+canvas.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: auto !important;
 }
