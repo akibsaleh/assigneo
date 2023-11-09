@@ -8,15 +8,15 @@ import MyAssignments from '../MyAssignments/MyAssignments';
 import UpdateAssignment from '../UpdateAssignment/UpdateAssignment';
 import SingleAssignment from '../SingleAssignment/SingleAssignment';
 import CreateAssignments from '../CreateAssignments/CreateAssignments';
-import axios from 'axios';
 import SubmittedAssignments from '../SubmittedAssignments/SubmittedAssignments';
 import SingleSubmission from '../SingleSubmission/SingleSubmission';
+import Error from '../Error/Error';
 
 export const route = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <div>Error</div>,
+    errorElement: <Error />,
     children: [
       {
         path: '/',
@@ -57,7 +57,6 @@ export const route = createBrowserRouter([
       {
         path: '/update/:id',
         element: <UpdateAssignment />,
-        loader: ({ params }) => axios.get(`/update/${params.id}`).data,
       },
       {
         path: '/assignment/',

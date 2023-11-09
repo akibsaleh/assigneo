@@ -1,7 +1,16 @@
+import Title from '../SharedComponents.jsx/Title';
+import UpdateForm from './UpdateForm';
+
 const UpdateAssignment = () => {
   return (
-    <div>
-      <h1>UpdateAssignment</h1>
+    <div className="bg-white dark:bg-oxford">
+      <Title
+        title={'Update Assignment'}
+        subTitle={'Fill up the form below to update assignment.'}
+      />
+      <div className="flex flex-col justify-center items-center grow bg-white dark:bg-oxford">
+        <UpdateForm />
+      </div>
     </div>
   );
 };

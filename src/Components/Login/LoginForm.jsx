@@ -14,8 +14,11 @@ const LoginForm = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     handleEmailPassSignin(email, password)
-      .then(() => {
-        toast.success('Logged in successfully');
+      .then((userCredential) => {
+        console.log(userCredential);
+        if (userCredential.user) {
+          toast.success('Logged in successfully');
+        }
       })
       .catch((error) => {
         toast.error(error.message);

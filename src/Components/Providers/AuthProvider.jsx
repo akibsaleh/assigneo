@@ -38,23 +38,48 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // useEffect(() => {
+  //   const unSubscribe = async () =>
+  //     onAuthStateChanged(auth, (currentUser) => {
+  //       const userEmail = currentUser?.email || user?.email;
+  //       const loggedUser = { email: userEmail };
+  //       if (currentUser) {
+  //         setUser(currentUser);
+  //         setLoading(false);
+  //         axios
+  //           .post('/jwt', loggedUser, { withCredentials: true })
+  //           .then()
+  //           .catch((err) => console.log(err));
+  //       } else {
+  //         setProfileInfo({});
+  //         axios.post('/logout', loggedUser, { withCredentials: true });
+  //       }
+  //     });
+
+  //   return () => {
+  //     unSubscribe();
+  //   };
+  // }, [user?.email]);
+
   useEffect(() => {
-    const unSubscribe = async () =>
-      onAuthStateChanged(auth, (currentUser) => {
-        const userEmail = currentUser?.email || user?.email;
-        const loggedUser = { email: userEmail };
-        if (currentUser) {
-          setUser(currentUser);
-          setLoading(false);
-          axios
-            .post('/jwt', loggedUser, { withCredentials: true })
-            .then()
-            .catch((err) => console.log(err));
-        } else {
-          setProfileInfo({});
-          axios.post('/logout', loggedUser, { withCredentials: true });
-        }
-      });
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      if (currentUser) {
+        setUser(currentUser);
+        setLoading(false);
+        axios
+          .post('/jwt', loggedUser, { withCredentials: true })
+          .then()
+          .catch((err) => console.log(err));
+      }
+      if (!currentUser) {
+        setProfileInfo({});
+        axios.post('/logout', loggedUser, { withCredentials: true });
+      }
+    });
 
     return () => {
       unSubscribe();
