@@ -19,7 +19,7 @@ const AllAssignments = () => {
 
   const { data } = useQuery({ queryKey: ['assignments', filter], queryFn: () => getAssignmentList(filter) });
 
-  if (data === null) {
+  if (!data) {
     return (
       <div className="container mx-auto">
         <div className="bg-white dark:bg-oxford">
@@ -74,12 +74,16 @@ const AllAssignments = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-10">
-        {data?.map((assignment) => (
-          <AssignmentCard
-            key={assignment._id}
-            assignment={assignment}
-          />
-        ))}
+        {data?.length !== 0 ? (
+          data?.map((assignment) => (
+            <AssignmentCard
+              key={assignment._id}
+              assignment={assignment}
+            />
+          ))
+        ) : (
+          <h1 className="col-span-4 text-center">No Assignments found</h1>
+        )}
       </div>
     </div>
   );

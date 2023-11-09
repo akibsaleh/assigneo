@@ -9,36 +9,34 @@ import { CgArrowsExchangeAltV } from 'react-icons/cg';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import DoorDashFavorite from '../CustomLoader/DoorDashFavorite';
 
 const fileTypes = ['jpg', 'jpeg', 'png'];
 
 const UpdateForm = () => {
+  const [dueDate, setDueDate] = useState(new Date());
+  const [thumb, setThumb] = useState('');
+  const [isPublished, setIsPublished] = useState(false);
   const { id } = useParams();
   const [assignmentDetails, setAssignmentDetails] = useState(null);
 
   useEffect(() => {
     axios.get(`/assignment/${id}`).then((res) => {
       setAssignmentDetails(res?.data);
-      setDueDate(res?.data?.date);
+      const oldDate = Date.parse(res?.data?.date);
+      setDueDate(new Date(oldDate));
+      const uploadedThumb = res?.data?.uploadedThumb;
+      setThumb(uploadedThumb);
     });
   }, [id]);
 
-  console.log(assignmentDetails);
-
-  console.log(assignmentDetails);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
     reset,
-  } = useForm({
-    defaultValues: {},
-  });
-
-  const [dueDate, setDueDate] = useState(new Date());
-  const [thumb, setThumb] = useState(null);
-  const [isPublished, setIsPublished] = useState(false);
+  } = useForm();
 
   const handleThumb = (file) => {
     setThumb(file);
@@ -50,29 +48,49 @@ const UpdateForm = () => {
   }, [dueDate, setValue, thumb]);
 
   const handleOnSubmit = async (data) => {
+    for (let key in data) {
+      if (!data[key]) {
+        data[key] = assignmentDetails[key];
+      }
+    }
+
     const formData = new FormData();
     for (let key in data) {
       formData.append(key, data[key]);
     }
 
-    const result = await axios.post('/assignment', formData);
-
-    if (result.status === 200 && result.data.insertedId) {
+    if (thumb.size > 0) {
+      const result = await axios.patch(`http://localhost:5000/assignment/${id}`, formData);
       console.log(result);
-      toast.success('Assignment published successfully');
-      setIsPublished(true);
+    } else {
+      const result = await axios.patch(`http://localhost:5000/assignment/${id}`, data);
+      console.log(result);
     }
+
+    // if (result) {
+    //   console.log(result);
+    //   toast.success('Assignment updated successfully');
+    //   setIsPublished(true);
+    // }
 
     if (errors) console.log(errors);
   };
 
   useEffect(() => {
     if (isPublished) {
-      reset();
-      setDueDate(new Date());
-      setThumb(null);
+      axios.get(`/assignment/${id}`).then((res) => {
+        setAssignmentDetails(res?.data);
+      });
     }
-  }, [isPublished, reset]);
+  }, [id, isPublished, reset]);
+
+  if (!assignmentDetails) {
+    return (
+      <div className="container max-w-screen-md mx-auto flex flex-col items-center">
+        <DoorDashFavorite />
+      </div>
+    );
+  }
 
   return (
     <form
@@ -89,7 +107,7 @@ const UpdateForm = () => {
             {thumb ? (
               <div className="h-full flex-1 flex flex-col relative p-1 overflow-hidden">
                 <img
-                  src={URL.createObjectURL(thumb)}
+                  src={typeof thumb === 'string' ? thumb : URL.createObjectURL(thumb)}
                   alt="thumbnail"
                   className="flex-1 h-full w-auto object-cover rounded-xl"
                 />
@@ -122,7 +140,7 @@ const UpdateForm = () => {
             id="thumbnailUrl"
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             placeholder="Enter the url of the thumbnail image"
-            {...register('thumbnailUrl')}
+            {...register('thumbnailUrl', { value: assignmentDetails?.thumbnailUrl })}
           />
         </div>
       </div>
@@ -140,9 +158,13 @@ const UpdateForm = () => {
             id="title"
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             placeholder="Enter the title of the assignment"
-            {...register('title', {
-              required: 'Assignment title is required',
-            })}
+            {...register(
+              'title',
+              { value: assignmentDetails?.title },
+              {
+                required: 'Assignment title is required',
+              }
+            )}
           />
           {errors.title && <p className="text-sm mt-1 text-red-500">{errors.title?.message}</p>}
         </div>
@@ -159,9 +181,13 @@ const UpdateForm = () => {
             id="marks"
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             placeholder="Enter the title of the assignment"
-            {...register('marks', {
-              required: 'Assignment marks is required',
-            })}
+            {...register(
+              'marks',
+              { value: assignmentDetails?.marks },
+              {
+                required: 'Assignment marks is required',
+              }
+            )}
           />
           {errors.marks && <p className="text-sm mt-1 text-red-500">{errors.marks?.message}</p>}
         </div>
@@ -177,7 +203,7 @@ const UpdateForm = () => {
             <select
               id="hs-select-label"
               className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
-              defaultValue="default"
+              defaultValue={assignmentDetails?.difficulty}
               {...register('difficulty', {
                 required: 'Difficulty level is required',
               })}
@@ -207,7 +233,10 @@ const UpdateForm = () => {
           <DatePicker
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
             selected={dueDate}
-            onChange={(date) => setDueDate(date)}
+            onChange={(date) => {
+              setDueDate(date);
+              console.log(date);
+            }}
             value={assignmentDetails?.data?.date}
           />
         </div>
@@ -224,9 +253,13 @@ const UpdateForm = () => {
             rows={3}
             placeholder="This is a textarea placeholder"
             defaultValue={''}
-            {...register('description', {
-              required: 'Assignment description is required',
-            })}
+            {...register(
+              'description',
+              { value: assignmentDetails?.description },
+              {
+                required: 'Assignment description is required',
+              }
+            )}
           />
           {errors.description && <p className="text-sm mt-1 text-red-500">{errors.description?.message}</p>}
         </div>
@@ -236,7 +269,8 @@ const UpdateForm = () => {
           type="submit"
           className="w-full max-w-md py-3.5 px-4 inline-flex gap-x-2 text font-semibold uppercase justify-center items-center rounded-full border border-mandarin/50 bg-mandarin text-rich shadow-sm hover:bg-mandarin/75 duration-200 transition-colors"
         >
-          <TiDocumentAdd className="text-xl" /> Publish a new Assignment
+          <TiDocumentAdd className="text-xl" />
+          Update Assignment
         </button>
       </div>
     </form>
