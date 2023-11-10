@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FileUploader } from 'react-drag-drop-files';
@@ -8,10 +8,13 @@ import { LuImagePlus } from 'react-icons/lu';
 import { CgArrowsExchangeAltV } from 'react-icons/cg';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../Providers/AuthProvider';
 
 const fileTypes = ['jpg', 'jpeg', 'png'];
 
 const AssignmentForm = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -31,7 +34,9 @@ const AssignmentForm = () => {
   useEffect(() => {
     setValue('date', dueDate);
     setValue('thumb', thumb);
-  }, [dueDate, setValue, thumb]);
+    setValue('publisher', user?.displayName);
+    setValue('publisher_email', user?.email);
+  }, [dueDate, setValue, thumb, user?.displayName, user.email]);
 
   const handleOnSubmit = async (data) => {
     const formData = new FormData();
