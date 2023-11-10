@@ -13,7 +13,7 @@ const AllAssignments = () => {
   };
 
   const getAssignmentList = async (filter) => {
-    const { data } = await axios.get(`http://localhost:5000/all-assignment?difficulty=${filter}`);
+    const { data } = await axios.get(`/all-assignment?difficulty=${filter}`);
     return data;
   };
 

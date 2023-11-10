@@ -16,7 +16,6 @@ const fileTypes = ['jpg', 'jpeg', 'png'];
 const UpdateForm = () => {
   const [dueDate, setDueDate] = useState(new Date());
   const [thumb, setThumb] = useState('');
-  const [isPublished, setIsPublished] = useState(false);
   const { id } = useParams();
   const [assignmentDetails, setAssignmentDetails] = useState(null);
 
@@ -35,7 +34,6 @@ const UpdateForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    reset,
   } = useForm();
 
   const handleThumb = (file) => {
@@ -59,30 +57,20 @@ const UpdateForm = () => {
       formData.append(key, data[key]);
     }
 
-    if (thumb.size > 0) {
-      const result = await axios.patch(`http://localhost:5000/assignment/${id}`, formData);
-      console.log(result);
-    } else {
-      const result = await axios.patch(`http://localhost:5000/assignment/${id}`, data);
-      console.log(result);
+    const result = await axios({
+      method: 'PATCH',
+      url: `/assignment/${id}`,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    if (result?.data?.modifiedCount > 0) {
+      toast.success('Assignment updated Successfully');
     }
-
-    // if (result) {
-    //   console.log(result);
-    //   toast.success('Assignment updated successfully');
-    //   setIsPublished(true);
-    // }
 
     if (errors) console.log(errors);
   };
-
-  useEffect(() => {
-    if (isPublished) {
-      axios.get(`/assignment/${id}`).then((res) => {
-        setAssignmentDetails(res?.data);
-      });
-    }
-  }, [id, isPublished, reset]);
 
   if (!assignmentDetails) {
     return (
