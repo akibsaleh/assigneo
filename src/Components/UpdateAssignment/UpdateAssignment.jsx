@@ -3,7 +3,7 @@ import UpdateForm from './UpdateForm';
 
 const UpdateAssignment = () => {
   return (
-    <div className="bg-white dark:bg-oxford">
+    <div className="bg-white dark:bg-oxford flex flex-col grow">
       <Title
         title={'Update Assignment'}
         subTitle={'Fill up the form below to update assignment.'}

@@ -8,7 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import axios from 'axios';
-axios.defaults.baseURL = 'https://b8a11-server-side-akibsaleh.vercel.app/';
+// axios.defaults.baseURL = 'https://b8a11-server-side-akibsaleh.vercel.app/';
+axios.defaults.baseURL = 'http://localhost:5000/';
 
 const queryClient = new QueryClient();
 

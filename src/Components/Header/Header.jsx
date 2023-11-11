@@ -95,7 +95,7 @@ const Header = () => {
                   ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
                 }
               >
-                All Submissions
+                Submitted Assignments
               </NavLink>
               <NavLink
                 to="/my-assignments"

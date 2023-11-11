@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
         axios
           .post('/jwt', loggedUser, { withCredentials: true })
-          .then()
+          .then(() => console.log(loggedUser))
           .catch((err) => console.log(err));
       }
       if (!currentUser) {
