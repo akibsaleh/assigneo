@@ -1,6 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 const MarkingForm = ({ id, submission }) => {
   const {
     register,
@@ -13,7 +14,11 @@ const MarkingForm = ({ id, submission }) => {
     const status = 'completed';
     const newData = { status, ...data };
     console.log(newData);
-    axios.patch(`/submission/${id}`, newData).then((res) => console.log(res));
+    axios.patch(`/submission/${id}`, newData).then((res) => {
+      if (res.modifiedCount > 0) {
+        toast.success('Submission marked successfully');
+      }
+    });
   };
 
   return (

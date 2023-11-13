@@ -1,8 +1,20 @@
-# React + Vite
+# Assigneo - Assignment 11
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Link:** https://assigneo-akib-saleh.web.app/
+**Github repo :** https://github.com/Porgramming-Hero-web-course/b8a11-client-side-akibsaleh
+**Assignment Category:** 1
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Some possible features of this website are:
+
+1.  **Launch Assignment**: This feature allows users to create and share assignments with their friends or classmates. Users can choose the
+    topic, deadline, and difficulty level of the assignment.
+
+**Submit Assignment**: This feature allows users to upload their completed assignments to the website and receive feedback from their peers.
+
+**Manage Submission**: This feature allows users to track the status of their assignments submissions. Users can check their obtained marks and feedback given to their submission.
+
+**Mutate Assignment**: This feature allows users to update their assignment after publishing. Only the use who published assignment can update and delete that assignment.
+
+**Media Upload**: User can upload JPG/PNG images by dragging and dropping during assignment creation. Users are also allowed to provide lik of the images during assignment creation. Users are able to provide pdf links and quick notes during assignment submission.

@@ -19,7 +19,7 @@ const MyAssignments = () => {
   const { data } = useQuery({
     queryKey: ['myAssignment', email],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:5000/my-assignment?email=${email}`, { withCredentials: true });
+      const response = await axios.get(`/my-assignment?email=${email}`, { withCredentials: true });
       return response?.data;
     },
     retry: 5,
