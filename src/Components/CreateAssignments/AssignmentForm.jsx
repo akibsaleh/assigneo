@@ -14,7 +14,6 @@ const fileTypes = ['jpg', 'jpeg', 'png'];
 
 const AssignmentForm = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
   const {
     register,
     handleSubmit,
@@ -47,7 +46,6 @@ const AssignmentForm = () => {
     const result = await axios.post('/assignment', formData);
 
     if (result.status === 200 && result.data.insertedId) {
-      console.log(result);
       toast.success('Assignment published successfully');
       setIsPublished(true);
     }

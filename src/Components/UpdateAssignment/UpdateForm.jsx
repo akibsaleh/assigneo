@@ -8,7 +8,7 @@ import { LuImagePlus } from 'react-icons/lu';
 import { CgArrowsExchangeAltV } from 'react-icons/cg';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DoorDashFavorite from '../CustomLoader/DoorDashFavorite';
 import { AuthContext } from '../Providers/AuthProvider';
 
@@ -20,6 +20,7 @@ const UpdateForm = () => {
   const [thumb, setThumb] = useState('');
   const { id } = useParams();
   const [assignmentDetails, setAssignmentDetails] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/assignment/${id}`).then((res) => {
@@ -70,6 +71,7 @@ const UpdateForm = () => {
     });
     if (result?.data?.modifiedCount > 0) {
       toast.success('Assignment updated Successfully');
+      navigate(`/all-assignments`);
     }
 
     if (errors) console.log(errors);

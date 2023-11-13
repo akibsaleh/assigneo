@@ -3,13 +3,19 @@ import { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../Providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MediaButton = () => {
   const { handleGoogleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const onGoogleSignin = () => {
     handleGoogleLogin()
-      .then((user) => {
-        toast.success('Logged in successfully with google');
+      .then((userCredential) => {
+        if (userCredential.user) {
+          toast.success('Logged in successfully');
+          navigate(location.state?.from || '/');
+        }
       })
       .catch((error) => {
         console.log(error);

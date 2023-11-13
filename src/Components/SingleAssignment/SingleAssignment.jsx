@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import SingleLoader from '../CustomLoader/SingleLoader';
 import { LuFileSignature } from 'react-icons/lu';
 import { MdDateRange } from 'react-icons/md';
@@ -10,17 +10,32 @@ import { TbEditCircle } from 'react-icons/tb';
 import { BiSolidTrash } from 'react-icons/bi';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import TakeAssignmentForm from './TakeAssignmentForm';
+import { AuthContext } from '../Providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const SingleAssignment = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  console.log(data);
 
   useEffect(() => {
     axios.get(`/assignment/${id}`).then((result) => setData(result?.data));
   }, [id]);
 
-  const handleDelete = () => {
-    console.log('It will delete the Assignment');
+  const handleDelete = async () => {
+    try {
+      const result = await axios.delete(`/rm-assignment/${id}?email=${data?.publisher_email}`, { withCredentials: true });
+      if (result?.status === 200) {
+        toast.success('Assignment deleted successfully');
+        navigate('/all-assignments');
+        setData(null);
+      }
+    } catch (err) {
+      if (err.response.status === 400) toast.error('You are not allowed to delete this assignment');
+      else console.log(err);
+    }
   };
 
   if (data === null) {
@@ -61,13 +76,15 @@ const SingleAssignment = () => {
             >
               <TbEditCircle className="text-xl" /> Take Assignment
             </button>
-            <button
-              type="button"
-              onClick={handleDelete}
-              className="w-fit py-3.5 px-8 inline-flex gap-x-2 font-bold capitalize justify-center items-center rounded-full border border-mandarin/50 bg-red-500 text-white shadow-sm hover:bg-red-700 duration-200 transition-colors"
-            >
-              <BiSolidTrash className="text-xl" /> Delete
-            </button>
+            {user?.email && (
+              <button
+                type="button"
+                onClick={handleDelete}
+                className="w-fit py-3.5 px-8 inline-flex gap-x-2 font-bold capitalize justify-center items-center rounded-full border border-mandarin/50 bg-red-500 text-white shadow-sm hover:bg-red-700 duration-200 transition-colors"
+              >
+                <BiSolidTrash className="text-xl" /> Delete
+              </button>
+            )}
           </div>
         </div>
         <div className="w-full h-full relative">

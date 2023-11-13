@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { Link } from 'react-router-dom';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const ViewPDF = ({ pdf }) => {
@@ -48,13 +49,21 @@ const ViewPDF = ({ pdf }) => {
 
   return (
     <div className="w-full col-span-4">
-      {/* Render a Document component with the file prop */}
+      <p className="mb-10">
+        View or Download Submitted pdf{' '}
+        <Link
+          to={pdf}
+          target="_blank"
+          className="w-fit py-2.5 px-6 inline-flex gap-x-2 font-bold capitalize justify-center items-center rounded-full border border-mandarin/50 bg-mandarin text-rich shadow-sm hover:bg-mandarin/75 duration-200 transition-colors"
+        >
+          Click Here
+        </Link>
+      </p>
       <Document
         file={pdf}
         onLoadSuccess={onLoadSuccess}
         onError={onError}
       >
-        {/* Render a Page component with the page number prop */}
         <Page
           pageNumber={pageNumber}
           renderTextLayer={false}
@@ -63,7 +72,6 @@ const ViewPDF = ({ pdf }) => {
           className="border border-platinum rounded-lg overflow-hidden"
         ></Page>
       </Document>
-      {/* Display the number of pages */}
       <p className="w-full text-center text-rich/30 font-bold text-sm py-3">
         Page {pageNumber} of {numPages}
       </p>

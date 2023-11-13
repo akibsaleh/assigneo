@@ -76,36 +76,42 @@ const Header = () => {
                   ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
                 }
               >
-                All Assignments
+                Assignments
               </NavLink>
 
-              <NavLink
-                to="/create-assignment"
-                className={({ isActive }) =>
-                  (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
-                  ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
-                }
-              >
-                Create Assignment
-              </NavLink>
-              <NavLink
-                to="/submitted-assignments"
-                className={({ isActive }) =>
-                  (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
-                  ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
-                }
-              >
-                Submitted Assignments
-              </NavLink>
-              <NavLink
-                to="/my-assignments"
-                className={({ isActive }) =>
-                  (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
-                  ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
-                }
-              >
-                My Assignments
-              </NavLink>
+              {user?.email && (
+                <NavLink
+                  to="/create-assignment"
+                  className={({ isActive }) =>
+                    (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
+                    ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
+                  }
+                >
+                  Create Assignment
+                </NavLink>
+              )}
+              {user?.email && (
+                <NavLink
+                  to="/submitted-assignments"
+                  className={({ isActive }) =>
+                    (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
+                    ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
+                  }
+                >
+                  Submitted Assignments
+                </NavLink>
+              )}
+              {user?.email && (
+                <NavLink
+                  to="/my-assignments"
+                  className={({ isActive }) =>
+                    (isActive ? 'text-mandarin' : 'text-rich dark:text-platinum') +
+                    ` capitalize font-semibold transition-colors duration-200 hover:text-mandarin sm:border-gray-300 sm:my-6   dark:hover:text-mandarin`
+                  }
+                >
+                  My Assignments
+                </NavLink>
+              )}
             </div>
           </div>
         </nav>

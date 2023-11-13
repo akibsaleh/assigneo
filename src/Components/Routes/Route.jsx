@@ -11,6 +11,7 @@ import CreateAssignments from '../CreateAssignments/CreateAssignments';
 import SubmittedAssignments from '../SubmittedAssignments/SubmittedAssignments';
 import SingleSubmission from '../SingleSubmission/SingleSubmission';
 import Error from '../Error/Error';
+import PrivateRoute from './PrivateRoute';
 
 export const route = createBrowserRouter([
   {
@@ -36,31 +37,59 @@ export const route = createBrowserRouter([
       },
       {
         path: '/submitted-assignments',
-        element: <SubmittedAssignments />,
+        element: (
+          <PrivateRoute>
+            <SubmittedAssignments />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/create-assignment',
-        element: <CreateAssignments />,
+        element: (
+          <PrivateRoute>
+            <CreateAssignments />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/my-assignments',
-        element: <MyAssignments />,
+        element: (
+          <PrivateRoute>
+            <MyAssignments />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/assignment/:id',
-        element: <SingleAssignment />,
+        element: (
+          <PrivateRoute>
+            <SingleAssignment />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/submission/:id',
-        element: <SingleSubmission />,
+        element: (
+          <PrivateRoute>
+            <SingleSubmission />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/update/:id',
-        element: <UpdateAssignment />,
+        element: (
+          <PrivateRoute>
+            <UpdateAssignment />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/assignment/',
-        element: <SingleAssignment />,
+        element: (
+          <PrivateRoute>
+            <SingleAssignment />
+          </PrivateRoute>
+        ),
       },
     ],
   },

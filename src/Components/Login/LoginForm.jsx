@@ -2,7 +2,10 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -15,9 +18,9 @@ const LoginForm = () => {
     const { email, password } = data;
     handleEmailPassSignin(email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         if (userCredential.user) {
           toast.success('Logged in successfully');
+          navigate(location?.state ? location?.state : '/');
         }
       })
       .catch((error) => {
