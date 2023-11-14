@@ -11,12 +11,12 @@ const AssignmentCard = ({ assignment }) => {
           alt={title}
         />
       </div>
-      <div className="pt-4 md:pt-5 grid grid-cols-2 divide-x divide-gray-100 items-center">
-        <h3 className="text-lg font-bold text-gray-800 dark:text-white col-span-2 text-center border-b border-gray-100 pb-4">{title}</h3>
-        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 py-2 pl-4 md:pl-5 text-center">
+      <div className="pt-4 md:pt-5 grid grid-cols-2 divide-x divide-gray-100 dark:divide-slate-700 items-center">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-white col-span-2 text-center border-b border-gray-100 dark:border-slate-700 pb-4">{title}</h3>
+        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 dark:border-slate-700 py-2 pl-4 md:pl-5 text-center">
           Marks: <span className="inline-block py-1 px-2 font-semibold">{marks}</span>
         </p>
-        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 text-center py-2 pr-4 md:pr-5">
+        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 dark:border-slate-700 text-center py-2 pr-4 md:pr-5">
           Difficulty:{' '}
           <span
             className={`inline-block py-1 px-2 text-rich rounded-lg ${difficulty === 'Hard' ? 'bg-red-200' : difficulty === 'Medium' ? 'bg-yellow-200' : difficulty === 'Easy' ? 'bg-green-200' : ''}`}

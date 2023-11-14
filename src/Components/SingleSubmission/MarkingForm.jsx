@@ -13,8 +13,8 @@ const MarkingForm = ({ id, submission }) => {
     // const { assignment_id, assignment_title, date, displayName, email, marks, note, pdf, photoURL } = submission;
     const status = 'completed';
     const newData = { status, ...data };
-    console.log(newData);
     axios.patch(`/submission/${id}`, newData).then((res) => {
+      console.log(res);
       if (res.modifiedCount > 0) {
         toast.success('Submission marked successfully');
       }

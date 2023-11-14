@@ -5,7 +5,7 @@ import MediaButton from '../SharedComponents.jsx/MediaButton';
 const Login = () => {
   return (
     <div className="w-full mx-auto gap-10 h-full bg-white dark:bg-oxford flex flex-col sm:flex-row justify-center items-center grow">
-      <div className="w-full sm:w-1/2 flex justify-center sm:justify-end items-center py-10">
+      <div className="w-full sm:w-1/2 flex justify-center sm:justify-end items-center py-10 px-5 sm:px-0">
         <div className="w-full max-w-md p-4 sm:p-7 mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-rich dark:text-white">Sign in</h1>

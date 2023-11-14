@@ -1,20 +1,11 @@
 import { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProvider';
-import { toast } from 'react-toastify';
+import LogoutButton from './LogoutButton';
 
 const Logout = () => {
-  const { user, handleLogout, profileInfo } = useContext(AuthContext);
-  const onLogOut = () => {
-    handleLogout()
-      .then(() => {
-        toast.success('Signed Out Successfully');
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-  };
+  const { user, profileInfo } = useContext(AuthContext);
   return (
-    <div className="flex gap-x-7 justify-center items-center">
+    <div className="hidden md:flex gap-x-7 justify-center items-center">
       <div className="hs-tooltip inline-block [--placement:bottom]">
         <img
           src={user?.photoURL || profileInfo?.photo}
@@ -27,12 +18,7 @@ const Logout = () => {
           {user?.displayName || profileInfo?.name}
         </span>
       </div>
-      <button
-        onClick={onLogOut}
-        className="bg-mandarin hover:bg-amber-400 flex items-center gap-x-2 capitalize font-semibold  px-5 py-2 rounded-full text-rich transition-colors duration-200 hover:text-slate-700 sm:border-gray-300 sm:my-6"
-      >
-        Sign Out
-      </button>
+      <LogoutButton />
     </div>
   );
 };

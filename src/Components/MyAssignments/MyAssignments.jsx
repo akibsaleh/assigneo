@@ -28,13 +28,13 @@ const MyAssignments = () => {
 
   if (data?.length > 0) {
     return (
-      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow">
+      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow px-5 sm:px-0">
         <div className="bg-white dark:bg-oxford">
           <Title
             title={'All Assignments'}
             subTitle={'Here are the collection of all the assignments'}
           />
-          <div className={`grid grid-cols-${data?.length > 1 ? '2' : '1'} gap-10 justify-items-center`}>
+          <div className={`grid grid-cols-1 md::grid-cols-${data?.length > 1 ? '2' : '1'} gap-10 justify-items-center`}>
             {data?.length !== 0 ? (
               data?.map((assignment) => (
                 <MyAssignmentCard
@@ -51,20 +51,20 @@ const MyAssignments = () => {
     );
   } else if (data?.length === 0) {
     return (
-      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow">
+      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow px-5 sm:px-0">
         <Title
           title={'My Assignments'}
           subTitle={'Here are all the assignments submitted by you'}
         />
         <div className="grid grid-cols-1 items-center text-center">
-          <h3>You have not published any assignment yet.</h3>
+          <h3>You have not submitted any assignment yet.</h3>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow">
+    <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow px-5 sm:px-0">
       <div className="bg-white dark:bg-oxford">
         <Title
           title={'All Assignments'}

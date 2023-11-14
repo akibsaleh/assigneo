@@ -31,6 +31,8 @@ const AssignmentForm = () => {
   };
 
   useEffect(() => {
+    const date = Date.now();
+    setValue('createdAt', date);
     setValue('date', dueDate);
     setValue('thumb', thumb);
     setValue('publisher', user?.displayName);
@@ -63,10 +65,10 @@ const AssignmentForm = () => {
 
   return (
     <form
-      className="w-full max-w-4xl rounded-md shadow-lg bg-platinum/20 p-10 mt-5 mb-20 mx-auto min-h-[500px] grid grid-cols-12 items-center gap-10"
+      className="w-full max-w-4xl rounded-md shadow-lg bg-platinum/20 p-10 mt-5 mb-20 mx-auto min-h-[500px] flex flex-col md:grid md:grid-cols-12 items-center gap-10"
       onSubmit={handleSubmit(handleOnSubmit)}
     >
-      <div className="col-span-5 w-full h-full rounded-md">
+      <div className="md:col-span-5 w-full h-full rounded-md">
         {/* Darg and Drop zone */}
         <FileUploader
           handleChange={handleThumb}
@@ -113,7 +115,7 @@ const AssignmentForm = () => {
           />
         </div>
       </div>
-      <div className="col-span-7 w-full flex flex-col gap-y-5">
+      <div className="md:col-span-7 w-full flex flex-col gap-y-5">
         {/* Title */}
         <div className="flex flex-col gap-2">
           <label

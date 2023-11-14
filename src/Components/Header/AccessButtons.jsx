@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const AccessButtons = () => {
   return (
-    <div className="hidden sm:flex divide-x divide-rich">
+    <div className="flex divide-x divide-rich">
       <NavLink
         to="/login"
         className={({ isActive }) =>

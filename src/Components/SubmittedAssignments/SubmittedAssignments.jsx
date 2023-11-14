@@ -16,8 +16,8 @@ const SubmittedAssignments = () => {
       <div className="container max-w-screen-xl mx-auto flex flex-col grow">
         <div className="bg-white dark:bg-oxford">
           <Title
-            title={'All Assignments'}
-            subTitle={'Here are the collection of all the assignments'}
+            title={'Submitted Assignments'}
+            subTitle={'Here is the collection of all the submitted assignments'}
           />
         </div>
         <div>
@@ -26,58 +26,20 @@ const SubmittedAssignments = () => {
       </div>
     );
   return (
-    <div className="container max-w-screen-xl mx-auto flex flex-col grow">
+    <div className="container max-w-screen-xl mx-auto flex flex-col grow px-5 sm:px-0 pb-10">
       <div className="bg-white dark:bg-oxford">
         <Title
-          title={'All Assignments'}
-          subTitle={'Here are the collection of all the assignments'}
+          title={'Submitted Assignments'}
+          subTitle={'Here is the collection of all the submitted assignments'}
         />
       </div>
-      <div className="flex flex-col">
-        <div className="-m-1.5 overflow-x-auto">
-          <div className="p-1.5 min-w-full inline-block align-middle">
-            <div className="border rounded-lg overflow-hidden dark:border-gray-700">
-              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-gray-700 text-center">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                    >
-                      Examinee
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                    >
-                      Assignment
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                    >
-                      Marks
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                    >
-                      <span className="mr-7">Action</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {data?.map((submission, idx) => (
-                    <SubmissionCard
-                      key={idx}
-                      submission={submission}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        {data?.map((submission, idx) => (
+          <SubmissionCard
+            key={idx}
+            submission={submission}
+          />
+        ))}
       </div>
     </div>
   );

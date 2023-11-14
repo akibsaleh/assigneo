@@ -35,19 +35,23 @@ h6 {
 }
 
 h1 {
-  @apply text-[4.209rem];
+  @apply md:text-[4.209rem];
+  @apply text-[2.105rem];
 }
 
 h2 {
-  @apply text-[3.157rem];
+  @apply sm:text-[3.157rem];
+  @apply text-[2.157rem];
 }
 
 h3 {
-  @apply text-[2.369rem];
+  @apply sm:text-[2.369rem];
+  @apply text-[1.69rem];
 }
 
 h4 {
-  @apply text-[1.77rem];
+  @apply sm:text-[1.77rem];
+  @apply text-[1.27rem];
 }
 
 h5,
