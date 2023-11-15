@@ -9,16 +9,15 @@ const MarkingForm = ({ id, submission }) => {
     formState: { errors },
   } = useForm();
 
-  const handleOnSubmit = (data) => {
+  const handleOnSubmit = async (data) => {
     // const { assignment_id, assignment_title, date, displayName, email, marks, note, pdf, photoURL } = submission;
     const status = 'completed';
     const newData = { status, ...data };
-    axios.patch(`/submission/${id}`, newData).then((res) => {
-      console.log(res);
-      if (res.modifiedCount > 0) {
-        toast.success('Submission marked successfully');
-      }
-    });
+    const result = await axios.patch(`/submission/${id}`, newData);
+    console.log(result);
+    if (result?.data?.modifiedCount > 0) {
+      toast.success('Mark given successfully');
+    }
   };
 
   return (
