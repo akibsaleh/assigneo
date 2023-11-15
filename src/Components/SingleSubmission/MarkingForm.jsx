@@ -24,7 +24,7 @@ const MarkingForm = ({ id, submission }) => {
   return (
     <form
       onSubmit={handleSubmit(handleOnSubmit)}
-      className="mt-5 mr-3 p-5 rounded-xl border border-platinum dark:border-slate-700 flex flex-col gap-y-5"
+      className="mt-5 mr-3 p-5 rounded-xl border border-platinum dark:border-slate-700 flex flex-col gap-y-5 w-full"
     >
       <h3 className="text-xl">Review Submission</h3>
       <div className="flex flex-col gap-y-3">

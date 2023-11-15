@@ -11,31 +11,37 @@ const AssignmentCard = ({ assignment }) => {
           alt={title}
         />
       </div>
-      <div className="pt-4 md:pt-5 grid grid-cols-2 divide-x divide-gray-100 dark:divide-slate-700 items-center">
-        <h3 className="text-lg font-bold text-gray-800 dark:text-white col-span-2 text-center border-b border-gray-100 dark:border-slate-700 pb-4">{title}</h3>
-        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 dark:border-slate-700 py-2 pl-4 md:pl-5 text-center">
-          Marks: <span className="inline-block py-1 px-2 font-semibold">{marks}</span>
-        </p>
-        <p className=" text-rich/80 dark:text-gray-400 border-b border-gray-100 dark:border-slate-700 text-center py-2 pr-4 md:pr-5">
-          Difficulty:{' '}
-          <span
-            className={`inline-block py-1 px-2 text-rich rounded-lg ${difficulty === 'Hard' ? 'bg-red-200' : difficulty === 'Medium' ? 'bg-yellow-200' : difficulty === 'Easy' ? 'bg-green-200' : ''}`}
+      <div className="flex flex-col h-full divide-x justify-between divide-gray-100 dark:divide-slate-700 items-center">
+        <h3 className="grow h-full text-lg font-bold text-gray-800 dark:text-white text-center border-b border-gray-100 dark:border-slate-700 w-full py-3 px-5">{title}</h3>
+        <div className="w-full flex justify-center items-center divide-x">
+          <p className=" text-rich/80 dark:text-gray-400 w-1/2 py-2 text-center">
+            Marks: <span className="inline-block py-1 px-2 font-semibold">{marks}</span>
+          </p>
+          <p className=" text-rich/80 dark:text-gray-400 w-1/2 text-center py-2">
+            Difficulty:{' '}
+            <span
+              className={`inline-block py-1 px-2 text-rich rounded-lg ${
+                difficulty === 'Hard' ? 'bg-red-200' : difficulty === 'Medium' ? 'bg-yellow-200' : difficulty === 'Easy' ? 'bg-green-200' : ''
+              }`}
+            >
+              {difficulty}
+            </span>
+          </p>
+        </div>
+        <div className="w-full grid grid-cols-2">
+          <Link
+            to={`/assignment/${_id}`}
+            className="text-center w-full py-4 font-bold bg-amb bg-mandarin text-white inline-block"
           >
-            {difficulty}
-          </span>
-        </p>
-        <Link
-          to={`/assignment/${_id}`}
-          className="text-center w-full py-4 font-bold bg-amb bg-mandarin text-white"
-        >
-          View Assignment
-        </Link>
-        <Link
-          to={`/update/${_id}`}
-          className="text-center w-full py-4 font-bold bg-[#3C64B9] text-white"
-        >
-          Update Assignment
-        </Link>
+            View Assignment
+          </Link>
+          <Link
+            to={`/update/${_id}`}
+            className="text-center w-full py-4 font-bold bg-[#3C64B9] text-white inline-block"
+          >
+            Update Assignment
+          </Link>
+        </div>
       </div>
     </div>
   );

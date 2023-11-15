@@ -26,14 +26,14 @@ const SubmittedAssignments = () => {
       </div>
     );
   return (
-    <div className="container max-w-screen-xl mx-auto flex flex-col grow px-5 sm:px-0 pb-10">
+    <div className="container max-w-screen-xl mx-auto flex flex-col grow px-5 lg:px-0 pb-10">
       <div className="bg-white dark:bg-oxford">
         <Title
           title={'Submitted Assignments'}
           subTitle={'Here is the collection of all the submitted assignments'}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {data?.map((submission, idx) => (
           <SubmissionCard
             key={idx}

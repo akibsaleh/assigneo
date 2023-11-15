@@ -14,7 +14,7 @@ const Header = () => {
   const { user } = useContext(AuthContext);
   return (
     <>
-      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-oxford dark:border-gray-700">
+      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 lg:py-0 dark:bg-oxford dark:border-gray-700">
         <nav
           className="relative max-w-7xl flex flex-wrap basis-full items-center w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 py-4 md:py-0"
           aria-label="Global"
@@ -48,7 +48,7 @@ const Header = () => {
               </div>
             )}
 
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button
                 type="button"
                 className="p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-rich shadow align-middle hover:bg-gray-100 dark:bg-rich dark:text-white dark:border-slate-600"
@@ -61,7 +61,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="grow sm:order-2 md:static md:block md:h-auto md:max-w-none md:w-auto md:border-r-transparent md:transition-none md:translate-x-0 md:z-40 md:basis-auto md:dark:border-r-transparent hidden">
+          <div className="grow sm:order-2 lg:static lg:block lg:h-auto lg:max-w-none lg:w-auto lg:border-r-transparent lg:transition-none lg:translate-x-0 lg:z-40 lg:basis-auto lg:dark:border-r-transparent hidden">
             <Menu />
           </div>
         </nav>
@@ -83,24 +83,26 @@ const Header = () => {
           </button>
         </div>
 
-        <div className="flex-shrink-0 group block px-4 pb-0 pt-8 w-full">
-          <div className="flex items-center">
-            <img
-              className="inline-block flex-shrink-0 h-[3.875rem] w-[3.875rem] rounded-full"
-              src={user?.photoURL}
-              alt="Image Description"
-            />
-            <div className="ms-3">
-              <h4 className="font-semibold text-gray-800 dark:text-white">{user?.displayName}</h4>
-              <p className="text-sm font-medium text-gray-400">{user?.email}</p>
+        {user?.email && (
+          <div className="flex-shrink-0 group block px-4 pb-0 pt-8 w-full">
+            <div className="flex items-center">
+              <img
+                className="inline-block flex-shrink-0 h-[3.875rem] w-[3.875rem] rounded-full"
+                src={user?.photoURL}
+                alt="Image Description"
+              />
+              <div className="ms-3">
+                <h4 className="font-semibold text-gray-800 dark:text-white">{user?.displayName}</h4>
+                <p className="text-sm font-medium text-gray-400">{user?.email}</p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="px-4 pb-4 pt-0 w-full">
           <Menu />
         </div>
-        <div className="p-4 w-full flex justify-center">{!user?.email ? <AccessButtons /> : <LogoutButton />}</div>
+        <div className="p-4 w-full flex md:hidden justify-center">{!user?.email ? <AccessButtons /> : <LogoutButton />}</div>
       </div>
     </>
   );

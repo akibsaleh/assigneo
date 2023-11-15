@@ -1,10 +1,14 @@
+import { useLocation } from 'react-router-dom';
 /* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Providers/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -17,8 +21,11 @@ const RegisterForm = () => {
     const { name, photo, email, password } = data;
     try {
       const userCredential = await handleEmailPassSignup(email, password);
-      await updateProfile(userCredential?.user?.auth?.currentUser, { displayName: name, photoURL: photo }).then(() => toast.success(`${name} signed up successfully`));
-      const newProfileInfo = await {
+      await updateProfile(userCredential?.user?.auth?.currentUser, { displayName: name, photoURL: photo }).then(() => {
+        navigate(location?.state ? location?.state?.from?.pathname : '/');
+        toast.success(`${name} signed up successfully`);
+      });
+      const newProfileInfo = {
         name: userCredential?.user?.auth?.currentUser?.displayName,
         photo: userCredential?.user?.auth?.currentUser?.photoURL,
       };

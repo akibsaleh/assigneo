@@ -28,11 +28,11 @@ const MyAssignments = () => {
 
   if (data?.length > 0) {
     return (
-      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow px-5 sm:px-0">
+      <div className="bg-white dark:bg-oxford container mx-auto max-w-screen-xl grow px-5 sm:px-0 pb-10">
         <div className="bg-white dark:bg-oxford">
           <Title
-            title={'All Assignments'}
-            subTitle={'Here are the collection of all the assignments'}
+            title={'My Assignments'}
+            subTitle={'Here is the collection of all of my assignments'}
           />
           <div className={`grid grid-cols-1 md::grid-cols-${data?.length > 1 ? '2' : '1'} gap-10 justify-items-center`}>
             {data?.length !== 0 ? (

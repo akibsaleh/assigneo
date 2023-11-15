@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
+import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FileUploader } from 'react-drag-drop-files';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { TiDocumentAdd } from 'react-icons/ti';
 import { LuImagePlus } from 'react-icons/lu';
 import { CgArrowsExchangeAltV } from 'react-icons/cg';
@@ -19,12 +20,19 @@ const AssignmentForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
     reset,
   } = useForm();
 
   const [dueDate, setDueDate] = useState(new Date());
   const [thumb, setThumb] = useState(null);
   const [isPublished, setIsPublished] = useState(false);
+
+  const difficulties = [
+    { value: 'Easy', label: 'Easy' },
+    { value: 'Medium', label: 'Medium' },
+    { value: 'Hard', label: 'Hard' },
+  ];
 
   const handleThumb = (file) => {
     setThumb(file);
@@ -104,7 +112,7 @@ const AssignmentForm = () => {
             htmlFor="thumbnailUrl"
             className="block text-sm font-medium dark:text-white"
           >
-            Thumbnail Image URL <span className="text-red-500 font-bold">*</span>
+            Thumbnail Image URL
           </label>
           <input
             type="text"
@@ -163,7 +171,7 @@ const AssignmentForm = () => {
             >
               Difficulty Level
             </label>
-            <select
+            {/* <select
               id="hs-select-label"
               className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
               defaultValue="default"
@@ -181,7 +189,22 @@ const AssignmentForm = () => {
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
-            </select>
+            </select> */}
+
+            <Controller
+              control={control}
+              name="difficulty"
+              rules={{ required: 'You have to select a difficulty level' }}
+              render={({ field: { onChange, value, ...field } }) => (
+                <Select
+                  {...field}
+                  options={difficulties}
+                  placeholder="Select difficulty level"
+                  onChange={(item) => onChange(item.value)}
+                  value={difficulties.find((option) => option.value === value)}
+                />
+              )}
+            />
           </>
           {errors.difficulty && <p className="text-sm mt-1 text-red-500">{errors.difficulty?.message}</p>}
         </div>
@@ -191,7 +214,7 @@ const AssignmentForm = () => {
             htmlFor="title"
             className="block text-sm font-medium dark:text-white"
           >
-            Due Date <span className="text-red-500 font-bold">*</span>
+            Due Date
           </label>
           <DatePicker
             className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"

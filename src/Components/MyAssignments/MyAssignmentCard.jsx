@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 const MyAssignmentCard = ({ assignment }) => {
-  console.log(assignment);
   return (
     <div className="min-h-[15rem] w-full max-w-xl flex flex-col bg-gray-50 shadow-lg border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
       <div className="flex flex-auto flex-col justify-center items-center pb-6">

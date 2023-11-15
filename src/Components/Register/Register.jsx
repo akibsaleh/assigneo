@@ -5,10 +5,10 @@ import RegisterForm from './RegisterForm';
 
 const Register = () => {
   return (
-    <div className="w-full mx-auto gap-10 h-full bg-white dark:bg-oxford flex flex-col sm:flex-row justify-center items-center grow">
-      <div className="w-full sm:w-1/2 flex justify-center sm:justify-end items-center pt-5 pb-14 sm:pb-5 px-5 sm:px-5">
-        <div className="w-full max-w-md p-4 sm:p-7 mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
-          <div className="text-center">
+    <div className="w-full mx-auto lg:gap-10 h-full bg-white dark:bg-oxford flex flex-col sm:flex-row justify-center items-center grow px-5 lg:px-0">
+      <div className="w-full md:w-3/5 flex justify-center sm:justify-end items-center pt-5 pb-14 sm:pb-5 px-5 sm:px-5">
+        <div className="w-full lg:w-1/2 max-w-md p-4 sm:p-7 mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div className="text-center w-full">
             <h1 className="block text-2xl font-bold text-rich dark:text-white">Sign up</h1>
             <p className="mt-2 text-sm text-rich/75 dark:text-gray-200">
               Already have an account?{' '}
@@ -37,7 +37,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="w-full sm:w-1/2 hidden sm:flex justify-center sm:justify-start items-center">
+      <div className="w-full md:w-2/5 lg:w-1/2 hidden sm:flex justify-center sm:justify-start items-center">
         <img
           src={loginBG}
           className="w-full h-auto max-w-2xl"

@@ -6,7 +6,7 @@ const Logout = () => {
   const { user, profileInfo } = useContext(AuthContext);
   return (
     <div className="hidden md:flex gap-x-7 justify-center items-center">
-      <div className="hs-tooltip inline-block [--placement:bottom]">
+      <div className="hs-tooltip hidden lg:inline-block [--placement:bottom]">
         <img
           src={user?.photoURL || profileInfo?.photo}
           className="hs-tooltip-toggle w-12 h-12 rounded-full shadow border-2 border-mandarin"

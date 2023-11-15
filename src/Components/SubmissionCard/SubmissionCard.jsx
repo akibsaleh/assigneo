@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { LiaExternalLinkSquareAltSolid } from 'react-icons/lia';
+import ViewPDF from '../SingleSubmission/ViewPDF';
 
 const SubmissionCard = ({ submission }) => {
   return (
@@ -19,6 +20,16 @@ const SubmissionCard = ({ submission }) => {
         <div>
           <h3 className="text-lg font-bold text-gray-800 dark:text-white">Examinee: {submission?.displayName}</h3>
           <p className="mt-2 text-gray-500 dark:text-gray-400">Marks: {submission?.marks}</p>
+          <button
+            data-hs-overlay={`#hs-basic-modal-${submission._id}`}
+            className="bg-mandarin text-rich mt-3 px-3 py-1.5 rounded-full"
+          >
+            Submitted PDF
+          </button>
+          <ViewPDF
+            pdf={submission?.pdf}
+            id={submission?._id}
+          />
         </div>
       </div>
       <Link

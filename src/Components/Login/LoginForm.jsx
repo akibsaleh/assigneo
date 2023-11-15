@@ -19,15 +19,15 @@ const LoginForm = () => {
     handleEmailPassSignin(email, password)
       .then((userCredential) => {
         if (userCredential.user) {
+          navigate(location?.state ? location?.state?.from?.pathname : '/');
           toast.success('Logged in successfully');
-          navigate(location?.state ? location?.state : '/');
         }
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
-
+  console.log(location);
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>
       <div className="grid gap-y-4">

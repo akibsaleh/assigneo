@@ -5,7 +5,8 @@ import { SlClose } from 'react-icons/sl';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ViewPDF = ({ pdf }) => {
+const ViewPDF = ({ pdf, id }) => {
+  console.log(pdf);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [pdfWidth, setPdfWidth] = useState(null);
@@ -50,7 +51,7 @@ const ViewPDF = ({ pdf }) => {
   return (
     <>
       <div
-        id="hs-basic-modal"
+        id={`hs-basic-modal-${id}`}
         className="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden w-full h-full fixed top-0 start-0 z-[60] opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none"
       >
         <div className="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-4xl sm:w-full m-3 sm:mx-auto">
@@ -60,7 +61,7 @@ const ViewPDF = ({ pdf }) => {
               <button
                 type="button"
                 className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                data-hs-overlay="#hs-basic-modal"
+                data-hs-overlay={`#hs-basic-modal-${id}`}
               >
                 <span className="sr-only">Close</span>
                 <SlClose />
@@ -108,7 +109,7 @@ const ViewPDF = ({ pdf }) => {
               <button
                 type="button"
                 className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                data-hs-overlay="#hs-basic-modal"
+                data-hs-overlay={`#hs-basic-modal-${id}`}
               >
                 Close
               </button>

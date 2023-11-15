@@ -18,7 +18,6 @@ const SingleAssignment = () => {
   const [data, setData] = useState(null);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(data);
 
   useEffect(() => {
     axios.get(`/assignment/${id}`).then((result) => setData(result?.data));
@@ -48,7 +47,7 @@ const SingleAssignment = () => {
 
   return (
     <>
-      <div className="container max-w-screen-xl mx-auto py-10 grid md:grid-cols-2 grow px-5 gap-y-10">
+      <div className="container max-w-screen-xl mx-auto py-10 grid lg:grid-cols-2 grow px-5 gap-y-10 gap-x-5">
         <div className="flex flex-col gap-y-3 order-last md:order-first">
           <p
             className={`inline-flex items-center gap-1  w-fit py-1 px-2 text-rich/70 font-bold rounded-lg ${

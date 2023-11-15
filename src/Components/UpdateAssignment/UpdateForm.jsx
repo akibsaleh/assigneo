@@ -127,7 +127,7 @@ const UpdateForm = () => {
               htmlFor="thumbnailUrl"
               className="block text-sm font-medium dark:text-white"
             >
-              Thumbnail Image URL <span className="text-red-500 font-bold">*</span>
+              Thumbnail Image URL
             </label>
             <input
               type="text"
@@ -145,7 +145,7 @@ const UpdateForm = () => {
               htmlFor="title"
               className="block text-sm font-medium dark:text-white"
             >
-              Assignment Title <span className="text-red-500 font-bold">*</span>
+              Assignment Title
             </label>
             <input
               type="text"
@@ -168,7 +168,7 @@ const UpdateForm = () => {
               htmlFor="marks"
               className="block text-sm font-medium dark:text-white"
             >
-              Assignment Marks <span className="text-red-500 font-bold">*</span>
+              Assignment Marks
             </label>
             <input
               type="number"
@@ -222,7 +222,7 @@ const UpdateForm = () => {
               htmlFor="title"
               className="block text-sm font-medium dark:text-white"
             >
-              Due Date <span className="text-red-500 font-bold">*</span>
+              Due Date
             </label>
             <DatePicker
               className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"
@@ -240,7 +240,7 @@ const UpdateForm = () => {
               htmlFor="title"
               className="block text-sm font-medium dark:text-white"
             >
-              Description <span className="text-red-500 font-bold">*</span>
+              Description
             </label>
             <textarea
               className="py-3 px-4 block w-full border bg-white border-platinum rounded-lg focus-visible:outline-mandarin  focus:border-mandarin focus:ring-mandarin dark:border-rich"

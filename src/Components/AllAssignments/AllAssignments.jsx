@@ -49,7 +49,7 @@ const AllAssignments = () => {
   }
 
   return (
-    <div className="container max-w-screen-xl mx-auto flex flex-col grow mb-20 px-5 sm:px-0">
+    <div className="container max-w-screen-xl mx-auto flex flex-col grow mb-20 px-5 lg:px-0">
       <div className="bg-white dark:bg-oxford">
         <Title
           title={'All Assignments'}
@@ -96,7 +96,7 @@ const AllAssignments = () => {
               page > 1 ? setPage(page - 1) : null;
             }}
             type="button"
-            className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-transparent dark:focus:bg-white/10 bg-platinum dark:bg-rich text-rich/75 dark:text-white"
+            className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg border border-transparent focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-transparent dark:focus:bg-white/10  dark:bg-rich text-rich/75 dark:text-white"
           >
             <HiOutlineChevronLeft />
             <span
